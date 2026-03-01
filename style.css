@@ -23,8 +23,8 @@ body{
 .snake{
     width: 20px;
     height: 20px;
-    background-color:darkcyan;
+    background-color:firebrick;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0px;
 }
