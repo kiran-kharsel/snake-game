@@ -1,32 +1,29 @@
 // dom elements
-const snake = document.querySelector('.snake')
+const gameBoard = document.querySelector('.game-board')
 
 
-//variable
-let x = 0;
-let y = 0;
+// game variable
+let snake = [{x: 10, y: 10}]
 
+// graw game map, snake, food
+function draw(){
+    // reset board element
+    drawSnake()
+}
 
-// function to move snake
-document.addEventListener('keydown', function(event){
-    switch(event.key){
-        case 'ArrowUp':
-            console.log('up arrow');
-            y -= 10;
-            break;
-        case 'ArrowDown':
-            console.log('down arrow');
-            y += 10;
-            break;
-        case 'ArrowLeft':
-            console.log('left arrow');
-            x -= 10;
-            break;
-        case 'ArrowRight':
-            console.log('right arrow');
-            x += 10;
-            break;
-    }
-    snake.style.transform = `translate(${x}px, ${y}px)`;
-});
+draw()
 
+// draw snake
+function drawSnake(){
+    snake.forEach((segment) => {
+        let snakeElement = document.createElement('div')
+        snakeElement.classList.add('snake')
+
+        // set position
+        snakeElement.style.gridColumn = segment.x
+        snakeElement.style.gridRow = segment.y
+
+        //append to board
+        gameBoard.appendChild(snakeElement)
+    })
+}
