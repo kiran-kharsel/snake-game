@@ -14,17 +14,21 @@ body{
 }
 
 .game-board{
-    width: 800px;
-    height: 800px;
     border: 2px solid black;
     position: relative;
+    display: grid;
+    grid-template-columns: repeat(20, 20px);
+    grid-template-rows: repeat(20, 20px);
 }
 
 .snake{
     width: 20px;
     height: 20px;
     background-color:firebrick;
-    position: absolute;
-    left: 0;
-    top: 0px;
+}
+
+.food{
+    width: 20px;
+    height: 20px;
+    background-color:cadetblue;
 }

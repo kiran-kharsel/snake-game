@@ -1,6 +1,6 @@
 // dom elements
 const snake = document.querySelector('.snake')
-console.log(snake)
+
 
 //variable
 let x = 0;
@@ -28,4 +28,5 @@ document.addEventListener('keydown', function(event){
             break;
     }
     snake.style.transform = `translate(${x}px, ${y}px)`;
-})
+});
+
