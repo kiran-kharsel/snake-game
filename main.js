@@ -6,6 +6,9 @@ const gameBoard = document.querySelector('.game-board')
 const gridSize = 20;
 let snake = [{x: 10, y: 10}]
 let food = generateFoodPosition()
+let gameInterval;
+let gameSpeedDelay = 1000;
+let gameStarted = false;
 
 // graw game map, snake, food
 function draw(){
@@ -60,3 +63,76 @@ function generateFoodPosition(){
     const y = Math.floor(Math.random() * gridSize) + 1;
     return {x,y}
 }
+
+
+// move the snake
+function moveSnake(){
+    // get snake head position
+    const head = {...snake[0]};
+
+    switch (direction) {
+        case 'right':
+            head.x++
+            break;
+        case 'left':
+            head.x--
+            break;
+        case 'up':
+            head.y--
+            break;
+        case 'down':
+            head.y++
+            break;
+    }
+    
+    // add new head
+    snake.unshift(head)
+
+
+    // test for food colliion
+    if(head.x === food.x && head.y === food.y){
+        // create new food
+        food = generateFoodPosition()
+        // clearInterval()
+        gameInterval = setInterval(()=> {
+            moveSnake()
+            draw()
+        }, gameSpeedDelay)
+    } else{
+        // remove last head position
+        snake.pop()
+    }
+}
+
+// start game function
+function startGame(){
+    gameStarted = true;
+    gameInterval = setInterval(() => {
+        moveSnake()
+        //checkCollision()
+        draw()
+    }, gameSpeedDelay)
+}
+
+
+// keypress event listener
+function handleKeyPress(event){
+    startGame()
+    console.log(event)
+    switch (event.key) {
+        case 'ArrowUp':
+            direction = 'up';
+            break;
+        case 'ArrowDown':
+            direction = 'down';
+            break;
+        case 'ArrowLeft':
+            direction = 'left';
+            break;
+        case 'ArrowRight':
+            direction = 'right';
+            break;
+    }
+}
+
+document.addEventListener('keydown', handleKeyPress)
