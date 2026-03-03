@@ -19,8 +19,7 @@ function drawSnake(){
         let snakeElement = createGameElement('div', 'snake')
         
         // set position
-        snakeElement.style.gridColumn = segment.x
-        snakeElement.style.gridRow = segment.y
+        setPosition(snakeElement, segment)
 
         //append to board
         gameBoard.appendChild(snakeElement)
@@ -32,4 +31,10 @@ function createGameElement(element, className){
     let gameElement = document.createElement(element)
     gameElement.classList.add(className)
     return gameElement
+}
+
+// set position for sanke or food
+function setPosition(element, position){
+    element.style.gridColumn = position.x
+    element.style.gridRow = position.y
 }
