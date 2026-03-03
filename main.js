@@ -16,9 +16,8 @@ draw()
 // draw snake
 function drawSnake(){
     snake.forEach((segment) => {
-        let snakeElement = document.createElement('div')
-        snakeElement.classList.add('snake')
-
+        let snakeElement = createGameElement('div', 'snake')
+        
         // set position
         snakeElement.style.gridColumn = segment.x
         snakeElement.style.gridRow = segment.y
@@ -26,4 +25,11 @@ function drawSnake(){
         //append to board
         gameBoard.appendChild(snakeElement)
     })
+}
+
+// create game element like anke or food
+function createGameElement(element, className){
+    let gameElement = document.createElement(element)
+    gameElement.classList.add(className)
+    return gameElement
 }
