@@ -1,5 +1,7 @@
 // dom elements
+const gameStartButton = document.querySelector('.game-start-btn')
 const gameBoard = document.querySelector('.game-board')
+const gameStartElem = document.querySelector('.game-start')
 
 
 // game variable
@@ -7,8 +9,28 @@ const gridSize = 20;
 let snake = [{x: 10, y: 10}]
 let food = generateFoodPosition()
 let gameInterval;
-let gameSpeedDelay = 1000;
+let gameSpeedDelay = 400;
 let gameStarted = false;
+let direction = 'right';
+
+
+gameStartButton.addEventListener('click', function(){
+    startGame();
+})
+
+// start game function
+function startGame(){
+    console.log('start game')
+    gameBoard.classList.remove('hidden')
+    gameStartElem.classList.add('hidden')
+
+    gameStarted = true;
+    gameInterval = setInterval(() => {
+        moveSnake()
+        //checkCollision()
+        draw()
+    }, gameSpeedDelay)
+}
 
 // graw game map, snake, food
 function draw(){
@@ -93,7 +115,7 @@ function moveSnake(){
     if(head.x === food.x && head.y === food.y){
         // create new food
         food = generateFoodPosition()
-        // clearInterval()
+        clearInterval(gameInterval)
         gameInterval = setInterval(()=> {
             moveSnake()
             draw()
@@ -104,22 +126,16 @@ function moveSnake(){
     }
 }
 
-// start game function
-function startGame(){
-    gameStarted = true;
-    gameInterval = setInterval(() => {
-        moveSnake()
-        //checkCollision()
-        draw()
-    }, gameSpeedDelay)
-}
+
 
 
 // keypress event listener
 function handleKeyPress(event){
-    startGame()
-    console.log(event)
-    switch (event.key) {
+    if(!gameStarted){
+        //startGame()
+    } else{
+
+        switch (event.key) {
         case 'ArrowUp':
             direction = 'up';
             break;
@@ -132,7 +148,9 @@ function handleKeyPress(event){
         case 'ArrowRight':
             direction = 'right';
             break;
+        }
     }
+    
 }
 
 document.addEventListener('keydown', handleKeyPress)
