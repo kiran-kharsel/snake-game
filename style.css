@@ -17,12 +17,17 @@ body{
     background-size: cover;
 }
 
+.hidden{
+    display: none !important;
+}
+
 .container{
     width: 800px;
     height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: red; */
 }
 
 .game-start{
@@ -49,21 +54,23 @@ body{
 
 
 .game-board{
-    border: 2px solid black;
+    border: 5px solid green;
     position: relative;
     display: grid;
     grid-template-columns: repeat(20, 20px);
     grid-template-rows: repeat(20, 20px);
+    background-color: rgba(255,255,255,0.4);
 }
 
 .snake{
     width: 20px;
     height: 20px;
-    background-color:firebrick;
+    background-color:green;
+    background-image: radial-gradient(lightgreen, green);
 }
 
 .food{
     width: 20px;
     height: 20px;
-    background-color:cadetblue;
+    background-image: radial-gradient(tomato, firebrick);
 }
